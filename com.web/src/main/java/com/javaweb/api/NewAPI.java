@@ -60,7 +60,7 @@ public class NewAPI {
 //		listBuiding.add(buidingDTO2);
 //		return listBuiding;
 //	}
-	public Object getBuillDing(@RequestParam(name = "name", required = false) String Mame,
+	public Object getBuillDing(@RequestParam(name = "name", required = false) String name,
 							@RequestParam(name = "districtid",required = false) Long district,
 							@RequestParam(name = "typeCode",required = false) List<String> typeCode) {
 // xử lý xong dưới DB Xong Rồi
