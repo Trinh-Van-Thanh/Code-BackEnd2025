@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: trinh thanh
+Build-Jdk: 21.0.4
+Implementation-Title: com.web
+Implementation-Version: 1.0
+Implementation-Vendor-Id: Spring-boot
+Implementation-Vendor: Pivotal Software, Inc.
+Implementation-URL: https://projects.spring.io/spring-boot/com.web/
+Created-By: Maven Integration for Eclipse
+
