@@ -2,6 +2,7 @@ package com.javaweb.api;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -23,8 +24,9 @@ import customexception.FielRequedException;
 public class NewAPI {
 	@Autowired
 	private BuidingServicer buidingServicer;
+
 	@PostMapping(value = "/test")
-	
+
 //	public BuiDingDTO getBuillDing(@RequestParam(value = "name", required = false) String name,
 //								@RequestParam(value = "number", required = false) Integer number) {
 //		// xử lý xong dưới DB Xong Rồi
@@ -60,9 +62,13 @@ public class NewAPI {
 //		listBuiding.add(buidingDTO2);
 //		return listBuiding;
 //	}
-	public Object getBuillDing(@RequestParam(name = "name", required = false) String name,
-							@RequestParam(name = "districtid",required = false) Long district,
-							@RequestParam(name = "typeCode",required = false) List<String> typeCode) {
+	public Object getBuillDing(@RequestParam Map<String, Object> params,
+			@RequestParam(name = "typeCode", required = false) List<String> typeCode) {
+		
+		 List<BuiDingDTO> result = buidingServicer.findAll(params,typeCode);
+		return result;
+		
+		
 // xử lý xong dưới DB Xong Rồi
 //
 //		try {
@@ -76,14 +82,13 @@ public class NewAPI {
 //			erroReponseDTO.setDateil(details);
 //			return erroReponseDTO;
 //		}
-		List<BuiDingDTO> result = buidingServicer.findAll(name,district);
-		return result;
+
 	}
-		public void valiDate(BuiDingDTO buiDingDTO) throws FielRequedException {
-			if(buiDingDTO.getName() == null || buiDingDTO.getName().equals("") || buiDingDTO.getNumberOfBasement() == null) {
-				throw new FielRequedException("name or NumberOfBasement is null");
-			}
-	}
+//		public void valiDate(BuiDingDTO buiDingDTO) throws FielRequedException {
+//			if(buiDingDTO.getName() == null || buiDingDTO.getName().equals("") || buiDingDTO.getNumberOfBasement() == null) {
+//				throw new FielRequedException("name or NumberOfBasement is null");
+//			}
+//	}
 
 //	@RequestMapping(value = "/test" ,method = RequestMethod.POST)
 //	public void getBuillDing1(@RequestBody BuiDingDTO buiDingDTO) {

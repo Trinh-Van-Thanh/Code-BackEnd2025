@@ -1,0 +1,5 @@
+/.metadata/
+/com.web/.settings
+/com.web/*.project
+/com.web/*.classpath
+/com.web/target
