@@ -1,10 +1,9 @@
 package com.javaweb.repository.entity;
 
 public class DistrictEntity {
-	private String name;
-	private Integer numberOfBasement;
-	private String ward;
-	private String sterrt;
+	private Long id;
+	private String name,code;
+	
 
 	public String getName() {
 		return name;
@@ -14,27 +13,21 @@ public class DistrictEntity {
 		this.name = name;
 	}
 
-	public Integer getNumberOfBasement() {
-		return numberOfBasement;
+
+	public String getCode() {
+		return code;
 	}
 
-	public void setNumberOfBasement(Integer numberOfBasement) {
-		this.numberOfBasement = numberOfBasement;
+	public void setCode(String code) {
+		this.code = code;
 	}
 
-	public String getWard() {
-		return ward;
+	public Long getId() {
+		return id;
 	}
 
-	public void setWard(String ward) {
-		this.ward = ward;
+	public void setId(Long id) {
+		this.id = id;
 	}
-
-	public String getSterrt() {
-		return sterrt;
-	}
-
-	public void setSterrt(String sterrt) {
-		this.sterrt = sterrt;
-	}
+	
 }

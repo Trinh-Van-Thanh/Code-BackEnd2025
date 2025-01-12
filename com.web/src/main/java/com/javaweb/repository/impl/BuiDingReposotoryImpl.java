@@ -23,7 +23,7 @@ public class BuiDingReposotoryImpl implements BuidingRepository {
 	static final String PASS = "root";
 
 	public static void joinTable(Map<String, Object> params, List<String> typeCode, StringBuilder sql) {
-		String staffid = (String) params.get("staffid");
+		String staffid = (String) params.get("staffId");
 		if (Stringulit.checkString(staffid)) {
 			sql.append("INNER JOIN assignmentbuilding ON b.id = assignmentbuilding.buildingid ");
 		}
@@ -34,29 +34,29 @@ public class BuiDingReposotoryImpl implements BuidingRepository {
 		String rentAreaTo = (String) params.get("areaTo");
 		String rentAreaFrom = (String) params.get("areaFrom");
 		if (Stringulit.checkString(rentAreaFrom) == true && Stringulit.checkString(rentAreaTo) == true) {
-			sql.append("INNER JOIN rentarea ON rentarea.buildingid = b.id");
+			sql.append("INNER JOIN rentarea ON rentarea.buildingid = b.id ");
 		}
 	}
 
 	public static void query(Map<String, Object> params, StringBuilder where) {
 		for (Map.Entry<String, Object> it : params.entrySet()) {
-			if (!it.getKey().equals("staffid") && !it.getKey().equals("typeCode") && !it.getKey().startsWith("area")
+			if (!it.getKey().equals("staffId") && !it.getKey().equals("typeCode") && !it.getKey().startsWith("area")
 					&& !it.getKey().startsWith("rentPrice")) {
 				String value = it.getValue().toString();
 				if (Stringulit.checkString(value)) {
 					if (Numberutil.isNumber(value) == true) {
-						where.append(" AND b." + it.getKey() + " = " + value);
+						where.append(" AND b. " + it.getKey() + " = " + value);
 					} else {
-						where.append(" AND b." + it.getKey() + " LIKE '%" + value + "%'");
+						where.append(" AND b. " + it.getKey() + " LIKE '%" + value + "%' ");
 					}
 				}
 			}
 		}
 	}
 	public static void querySpecial(Map<String, Object> params, List<String> typeCode, StringBuilder where) {
-		String staffid = (String) params.get("staffid");
+		String staffid = (String) params.get("staffId");
 		if(Stringulit.checkString(staffid)) {
-			where.append(" AND assignmentbuilding.staffid = " +staffid);
+			where.append(" AND assignmentbuilding.staffId = " + staffid);
 		}
 		String rentAreaTo = (String) params.get("areaTo");
 		String rentAreaFrom = (String) params.get("areaFrom");
@@ -65,7 +65,7 @@ public class BuiDingReposotoryImpl implements BuidingRepository {
 				where.append(" AND rentarea.value >=" + rentAreaFrom);
 			}
 			if(Stringulit.checkString(rentAreaTo)) {
-				where.append(" AND rentarea.value >=" + rentAreaTo);
+				where.append(" AND rentarea.value =<" + rentAreaTo);
 			}
 		}
 		String rentPriceTo = (String) params.get("rentPriceTo");
@@ -78,20 +78,27 @@ public class BuiDingReposotoryImpl implements BuidingRepository {
 				where.append(" AND b.rentprice >=" + rentPriceTo);
 			}
 		}
+		// java 7
 		if(typeCode != null && typeCode.size() != 0 ) {
-			where.append(" AND renttype.code IN(" + String.join(",", typeCode) + ")");
+//			where.append(" AND renttype.code IN(" + String.join(",", typeCode) + ")");
+			
+			List<String> code  = new ArrayList<String>();
+			for(String item: typeCode) {
+				code.add("'" + item + "'");
+			}
+			where.append(" AND renttype.code IN(" + String.join(",", code) + ") ");
 		}
 	}
 	@Override
 	public List<BuiDingEntity> findAll(Map<String, Object> params, List<String> typeCode) {
-		StringBuilder sql = new StringBuilder(
-				"select b.id, b.name,b.street, b.ward, b.numberofbasement, b.floorarea, b.rentprice,b.managername, "
-						+ "b.managerphonenumber, b.servicefee, b.brokeragefee from building b");
+		StringBuilder sql = new StringBuilder("select b.id, b.name,b.street,b.districtid, b.ward, b.numberofbasement, b.floorarea, b.rentprice,b.managername,b.managerphonenumber, b.servicefee, b.brokeragefee from building b");
 		joinTable(params, typeCode, sql);
-		StringBuilder where = new StringBuilder("where 1 = 1");
+		StringBuilder where = new StringBuilder(" where 1 = 1 ");
 		query(params, where);
 		querySpecial(params, typeCode, where);
 		where.append("GROUP BY b.id;");
+		sql.append(where);
+		System.out.print(sql);
 		List<BuiDingEntity> result = new ArrayList<>();
 		try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
 				Statement stm = conn.createStatement();
