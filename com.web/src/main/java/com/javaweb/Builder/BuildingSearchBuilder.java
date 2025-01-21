@@ -8,7 +8,7 @@ public class BuildingSearchBuilder {
 	private Long floorArea;
 	private String ward;
 	private String street;
-	private String districtCode;
+	private Long districtId;
 	private Integer numberOfBasement;
 	private List<String> typeCode = new ArrayList<String>();
 	private String managerName;
@@ -19,14 +19,12 @@ public class BuildingSearchBuilder {
 	private Long areaTo;
 	private Long staffId;
 
-	
-	
-	public BuildingSearchBuilder(Buider buider) {
+	private BuildingSearchBuilder(Buider buider) {
 		this.name = buider.name;
 		this.floorArea = buider.floorArea;
 		this.ward = buider.ward;
 		this.street = buider.street;
-		this.districtCode = buider.districtCode;
+		this.districtId = buider.districtId;
 		this.numberOfBasement = buider.numberOfBasement;
 		this.typeCode = buider.typeCode;
 		this.managerName = buider.managerName;
@@ -54,8 +52,8 @@ public class BuildingSearchBuilder {
 		return street;
 	}
 
-	public String getDistrictCode() {
-		return districtCode;
+	public Long getDistrictId() {
+		return districtId;
 	}
 
 	public Integer getNumberOfBasement() {
@@ -100,7 +98,7 @@ public class BuildingSearchBuilder {
 		private Long floorArea;
 		private String ward;
 		private String street;
-		private String districtCode;
+		private Long districtId;
 		private Integer numberOfBasement;
 		private List<String> typeCode = new ArrayList<String>();
 		private String managerName;
@@ -111,61 +109,76 @@ public class BuildingSearchBuilder {
 		private Long areaTo;
 		private Long staffId;
 
-		public void setName(String name) {
+		public Buider setName(String name) {
 			this.name = name;
+			return this;
 		}
 
-		public void setFloorArea(Long floorArea) {
+		public Buider setFloorArea(Long floorArea) {
 			this.floorArea = floorArea;
+			return this;
 		}
 
-		public void setWard(String ward) {
+		public Buider setWard(String ward) {
 			this.ward = ward;
+			return this;
 		}
 
-		public void setStreet(String street) {
+		public Buider setStreet(String street) {
 			this.street = street;
+			return this;
 		}
 
-		public void setDistrictCode(String districtCode) {
-			this.districtCode = districtCode;
+		public Buider setDistrictId(Long districtId) {
+			this.districtId = districtId;
+			return this;
 		}
 
-		public void setNumberOfBasement(Integer numberOfBasement) {
+		public Buider setNumberOfBasement(Integer numberOfBasement) {
 			this.numberOfBasement = numberOfBasement;
+			return this;
 		}
 
-		public void setTypeCode(List<String> typeCode) {
+		public Buider setTypeCode(List<String> typeCode) {
 			this.typeCode = typeCode;
+			return this;
 		}
 
-		public void setManagerName(String managerName) {
+		public Buider setManagerName(String managerName) {
 			this.managerName = managerName;
+			return this;
 		}
 
-		public void setManagerPhoneNumber(String managerPhoneNumber) {
+		public Buider setManagerPhoneNumber(String managerPhoneNumber) {
 			this.managerPhoneNumber = managerPhoneNumber;
+			return this;
 		}
 
-		public void setRentPriceFrom(Long rentPriceFrom) {
+		public Buider setRentPriceFrom(Long rentPriceFrom) {
 			this.rentPriceFrom = rentPriceFrom;
+			return this;
 		}
 
-		public void setRentPriceTo(Long rentPriceTo) {
+		public Buider setRentPriceTo(Long rentPriceTo) {
 			this.rentPriceTo = rentPriceTo;
+			return this;
 		}
 
-		public void setAreaFrom(Long areaFrom) {
+		public Buider setAreaFrom(Long areaFrom) {
 			this.areaFrom = areaFrom;
+			return this;
 		}
 
-		public void setAreaTo(Long areaTo) {
+		public Buider setAreaTo(Long areaTo) {
 			this.areaTo = areaTo;
+			return this;
 		}
 
-		public void setStaffId(Long staffId) {
+		public Buider setStaffId(Long staffId) {
 			this.staffId = staffId;
+			return this;
 		}
+
 		public BuildingSearchBuilder build() {
 			return new BuildingSearchBuilder(this);
 		}

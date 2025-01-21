@@ -2,7 +2,6 @@ package com.javaweb.repository.entity;
 
 public class BuiDingEntity {
 	private String name;
-	private String address;
 	private Long id;
 	//private String createDate;
 	private String wrad;
@@ -17,12 +16,6 @@ public class BuiDingEntity {
 	private Long brokerageFee;
 	public String getName() {
 		return name;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
 	}
 	public Long getId() {
 		return id;
