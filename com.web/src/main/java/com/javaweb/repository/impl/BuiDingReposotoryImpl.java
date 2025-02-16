@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Repository;
 
 import com.javaweb.Builder.BuildingSearchBuilder;
@@ -18,8 +20,19 @@ import com.javaweb.service.util.Numberutil;
 import com.javaweb.service.util.Stringulit;
 
 @Repository
+@PropertySource("classpath:application.properties")
 public class BuiDingReposotoryImpl implements BuidingRepository {
 
+	@Value("${spring.datasource.url}")
+	private String DB_URL;
+	
+	@Value("${spring.datasource.username}")
+	private String USER;
+	
+	@Value("${spring.datasource.password}")
+	private String PASS;
+	
+	
 	public static void joinTable(BuildingSearchBuilder buiSearchBuilder, StringBuilder sql) {
 		Long staffid = buiSearchBuilder.getStaffId();
 		if (staffid != null) {
